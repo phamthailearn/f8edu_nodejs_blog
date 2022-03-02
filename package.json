@@ -2,10 +2,11 @@
   "name": "blog",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js"
+    "watch":"node-sass --watch src/resources/scss --o src/public/css",
+    "start": "nodemon src/index.js"
   },
   "repository": {
     "type": "git",
@@ -23,9 +24,12 @@
   },
   "homepage": "https://github.com/phamthailearn/f8edu_nodejs_blog#readme",
   "dependencies": {
-    "express": "^4.17.3"
+    "express": "^4.17.3",
+    "express-handlebars": "^6.0.2"
   },
   "devDependencies": {
+    "morgan": "^1.10.0",
+    "node-sass": "^7.0.1",
     "nodemon": "^2.0.15"
   }
 }
