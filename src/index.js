@@ -6,7 +6,13 @@ const path = require('path');
 const app = express();
 const port = 3000;
 
-app.use(express.static(path.join(__dirname, 'public'))); // Khi gặp url kiểm tra trong public của path thông qua hàm static
+const route = require('./routes')
+
+app.use(express.static(path.join(__dirname, 'public'))); 
+app.use(express.urlencoded({
+    extended: true
+})); 
+app.use(express.json());
 
 // HTTP Logger
 app.use(morgan('combined'));
@@ -14,20 +20,11 @@ app.use(morgan('combined'));
 // Template engine
 app.engine('hbs', engine({
     extname:'.hbs'
-})); // Định nghĩa ra 'handlebars' = handlebar đã gọi
-app.set('view engine', 'hbs'); // Thiết lập view engine chính là handlebars đã định nghĩa ở trên -> tên phải giống nhau
-app.set('views', path.join(__dirname, 'resources/views')) // Thử viên path - quản lý path folder node
+})); 
+app.set('view engine', 'hbs'); 
+app.set('views', path.join(__dirname, 'resources/views'))
 
-// Route
-app.get('/', (req, res) => {
-    // return res.send(`<h1>Hello World!</h1>`);
-    res.render('home');
-});
+// Route 
+route(app);
 
-app.get('/news', (req, res) => {
-    // return res.send(`<h1>Hello World!</h1>`);
-    res.render('news');
-});
-
-// localhost - 127.0.0.1
 app.listen(port, () => console.log(`Example app listening on port ${port}`));
